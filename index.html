@@ -126,6 +126,8 @@ body{font-family:var(--sans);color:var(--bark);background:var(--cream);overflow-
 .product-card{width:clamp(280px,30vw,340px);border-radius:20px;overflow:hidden;background:rgba(251,247,240,0.04);border:1px solid rgba(251,247,240,0.06);transition:all .5s;cursor:pointer}
 .product-card:hover{transform:translateY(-8px);background:rgba(251,247,240,0.07);border-color:rgba(196,154,60,0.2);box-shadow:0 24px 60px rgba(0,0,0,0.3)}
 .card-visual{height:300px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.card-visual img{height:260px;width:auto;object-fit:contain;transition:transform .5s;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.25))}
+.product-card:hover .card-visual img{transform:translateY(-8px) scale(1.04)}
 .card-visual .glow-ring{position:absolute;width:200px;height:200px;border:1px solid rgba(196,154,60,0.08);border-radius:50%;transition:all .5s}
 .product-card:hover .glow-ring{border-color:rgba(196,154,60,0.18);transform:scale(1.1)}
 .card-c1 .card-visual{background:linear-gradient(160deg,rgba(58,107,53,0.12),rgba(58,107,53,0.03))}
@@ -403,21 +405,8 @@ footer{background:var(--bark);color:rgba(251,247,240,0.4);padding:2.5rem clamp(1
         <div class="stat-box"><div class="stat-num">1087<span class="stat-unit">份</span></div><div class="stat-text">调研问卷</div></div>
       </div>
     </div>
-    <div class="story-visual reveal reveal-d1">
-      <div class="deco-ring"></div>
-      <div class="deco-ring"></div>
-      <div class="deco-ring"></div>
-      <div class="center-icon">
-        <svg viewBox="0 0 120 120" fill="none">
-          <circle cx="60" cy="60" r="36" fill="#C49A3C" opacity="0.2"/>
-          <circle cx="60" cy="60" r="24" fill="#C49A3C" opacity="0.4"/>
-          <circle cx="60" cy="60" r="14" fill="#C49A3C"/>
-          <path d="M60 24 Q68 10 60 0 Q52 10 60 24Z" fill="#3A6B35" opacity="0.7"/>
-          <path d="M60 24 Q72 12 82 4 Q70 14 60 24Z" fill="#5A9B55" opacity="0.5"/>
-          <line x1="60" y1="4" x2="60" y2="24" stroke="#3A6B35" stroke-width="1" opacity="0.5"/>
-          <text x="60" y="64" text-anchor="middle" font-family="Noto Serif SC" font-size="8" fill="#fff" font-weight="600">无患子</text>
-        </svg>
-      </div>
+    <div class="story-visual reveal reveal-d1" style="overflow:hidden;background:none;border-radius:24px;">
+      <img src="全家福.png" alt="沐然产品全家福" style="width:100%;height:100%;object-fit:cover;border-radius:24px;">
     </div>
   </div>
 </section>
@@ -483,9 +472,7 @@ footer{background:var(--bark);color:rgba(251,247,240,0.4);padding:2.5rem clamp(1
     <div class="product-card card-c1 reveal">
       <div class="card-visual">
         <div class="glow-ring"></div>
-        <div class="bottle bc-green">
-          <div class="bottle-body"><div class="bottle-cap"></div><div class="bottle-label">沐然<br>柔润修复</div></div>
-        </div>
+        <img src="柔润修复实物图.png" alt="沐然柔润修复洗发乳">
       </div>
       <div class="card-body">
         <div class="card-tag">修复养护</div>
@@ -502,9 +489,7 @@ footer{background:var(--bark);color:rgba(251,247,240,0.4);padding:2.5rem clamp(1
     <div class="product-card card-c2 reveal reveal-d1">
       <div class="card-visual">
         <div class="glow-ring"></div>
-        <div class="bottle bc-teal">
-          <div class="bottle-body"><div class="bottle-cap"></div><div class="bottle-label">沐然<br>净澈控油</div></div>
-        </div>
+        <img src="净澈控油实物图.png" alt="沐然净澈控油洗发露">
       </div>
       <div class="card-body">
         <div class="card-tag">清爽净化</div>
@@ -521,9 +506,7 @@ footer{background:var(--bark);color:rgba(251,247,240,0.4);padding:2.5rem clamp(1
     <div class="product-card card-c3 reveal reveal-d2">
       <div class="card-visual">
         <div class="glow-ring"></div>
-        <div class="bottle bc-violet">
-          <div class="bottle-body"><div class="bottle-cap"></div><div class="bottle-label">沐然<br>植御去屑</div></div>
-        </div>
+        <img src="植御去屑实物图.png" alt="沐然植御去屑洗发露">
       </div>
       <div class="card-body">
         <div class="card-tag">去屑舒缓</div>
@@ -832,7 +815,7 @@ footer{background:var(--bark);color:rgba(251,247,240,0.4);padding:2.5rem clamp(1
     <div class="contact-item">
       <div class="ci-icon">📧</div>
       <div class="ci-label">商务邮箱</div>
-      <div class="ci-val">muran@cuiyuanbio.com</div>
+      <div class="ci-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8be6fef9eae5cbe8fee2f2feeae5e9e2e4a5e8e4e6">[email&#160;protected]</a></div>
     </div>
     <div class="contact-item">
       <div class="ci-icon">📍</div>
@@ -887,7 +870,7 @@ footer{background:var(--bark);color:rgba(251,247,240,0.4);padding:2.5rem clamp(1
 <!-- BACK TO TOP -->
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Nav scroll effect
 const mainNav = document.getElementById('mainNav');
 const prodSec = document.getElementById('products');
@@ -940,11 +923,4 @@ function animateCounters() {
 }
 const counterObserver = new IntersectionObserver((entries) => {
   entries.forEach(e => {
-    if (e.isIntersecting) { animateCounters(); counterObserver.disconnect(); }
-  });
-}, { threshold: 0.3 });
-const trustSection = document.getElementById('trust');
-if (trustSection) counterObserver.observe(trustSection);
-</script>
-</body>
-</html>
+    if (e.isInte
