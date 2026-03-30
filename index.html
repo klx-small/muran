@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>沐然 MURAN — 基于无患子提取物 Sanponin 的自然洗护系列</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --amber:#8B6914;--amber-light:#C49A3C;--amber-glow:#D4A84B;
+  --bark:#2D1F12;--bark-mid:#5C4A36;--bark-light:#8A7D6E;
+  --cream:#FBF7F0;--cream-warm:#F5EEE2;--cream-deep:#EDE4D3;
+  --sage:#3A6B35;--sage-light:#E8F0E4;
+  --teal:#2E8B9A;--teal-light:#E6F4F8;
+  --violet:#7B5EA7;--violet-light:#F0EAF6;
+  --serif:'Noto Serif SC','Playfair Display',serif;
+  --sans:'Noto Sans SC',sans-serif;
+  --display:'Playfair Display',serif;
+  --radius:16px;
+  --shadow-soft:0 4px 24px rgba(45,31,18,0.06);
+  --shadow-lift:0 12px 40px rgba(45,31,18,0.10);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--bark);background:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(196,154,60,0.25)}
+
+/* ====== NAV ====== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 clamp(1.5rem,5vw,5rem);height:72px;display:flex;align-items:center;justify-content:space-between;transition:all .45s cubic-bezier(.4,0,.2,1);background:transparent}
+.nav.scrolled{background:rgba(251,247,240,0.92);backdrop-filter:blur(24px);box-shadow:0 1px 0 rgba(0,0,0,0.05)}
+.nav-logo{font-family:var(--serif);font-size:1.35rem;font-weight:700;color:var(--bark);letter-spacing:8px;text-decoration:none;transition:color .3s}
+.nav-logo small{font-size:0.5em;letter-spacing:3px;font-weight:400;color:var(--bark-light);display:block;margin-top:2px}
+.nav-links{display:flex;align-items:center;gap:2.2rem}
+.nav-links a{font-size:13px;color:var(--bark-mid);text-decoration:none;font-weight:400;transition:all .3s;position:relative;letter-spacing:0.5px}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--amber-light);transition:width .3s}
+.nav-links a:hover::after{width:100%}
+.nav-links a:hover{color:var(--amber)}
+.nav-cta{padding:10px 28px;background:var(--amber-light);color:#fff;border:none;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;font-family:var(--sans);transition:all .3s;letter-spacing:1.5px}
+.nav-cta:hover{background:var(--bark);transform:translateY(-1px);box-shadow:0 8px 20px rgba(45,31,18,0.15)}
+.nav-dark .nav-logo{color:var(--cream)!important}
+.nav-dark .nav-logo small{color:rgba(251,247,240,0.4)!important}
+.nav-dark .nav-links a{color:rgba(251,247,240,0.55)!important}
+.nav-dark .nav-links a:hover{color:var(--cream)!important}
+.nav-dark .nav-links a::after{background:var(--amber-glow)!important}
+.mobile-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.mobile-toggle span{display:block;width:22px;height:2px;background:var(--bark);margin:5px 0;transition:.3s}
+
+/* ====== HERO ====== */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;background:linear-gradient(175deg,var(--cream) 0%,var(--cream-warm) 35%,var(--cream-deep) 65%,var(--cream) 100%);padding:2rem}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(196,154,60,0.06) 0%,transparent 50%),radial-gradient(ellipse at 70% 80%,rgba(139,105,20,0.04) 0%,transparent 50%);pointer-events:none}
+.hero-deco{position:absolute;pointer-events:none;opacity:0.04}
+.hero-deco:nth-child(1){width:260px;height:260px;border-radius:58% 42% 55% 45% / 45% 55% 45% 55%;background:var(--amber-light);top:12%;left:6%;animation:morphBlob 12s infinite ease-in-out}
+.hero-deco:nth-child(2){width:180px;height:180px;border-radius:45% 55% 42% 58% / 55% 45% 55% 45%;background:var(--amber);top:22%;right:10%;animation:morphBlob 15s infinite ease-in-out reverse}
+.hero-deco:nth-child(3){width:120px;height:120px;border-radius:50%;background:var(--amber-glow);bottom:20%;right:6%;animation:morphBlob 10s infinite ease-in-out}
+@keyframes morphBlob{0%,100%{border-radius:58% 42% 55% 45% / 45% 55% 45% 55%}25%{border-radius:45% 55% 42% 58% / 55% 45% 55% 45%}50%{border-radius:55% 45% 50% 50% / 50% 50% 45% 55%}75%{border-radius:42% 58% 55% 45% / 45% 55% 50% 50%}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+.hero-badge{display:inline-flex;align-items:center;gap:10px;padding:8px 24px;border:1px solid rgba(196,154,60,0.25);border-radius:100px;font-size:11px;letter-spacing:2.5px;color:var(--amber);text-transform:uppercase;margin-bottom:2rem;backdrop-filter:blur(10px);background:rgba(255,255,255,0.45);animation:fadeUp .8s ease both}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--amber-light);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:var(--serif);font-size:clamp(3rem,8vw,6.5rem);font-weight:900;letter-spacing:0.12em;color:var(--bark);line-height:1.15;margin-bottom:0.5rem;animation:fadeUp .8s .1s ease both}
+.hero h1 .en{display:block;font-family:var(--display);font-size:clamp(0.85rem,1.6vw,1.1rem);font-weight:400;font-style:italic;letter-spacing:0.25em;color:var(--amber-light);margin-top:0.8rem}
+.hero-sub{font-size:clamp(1rem,1.6vw,1.1rem);color:var(--bark-mid);max-width:500px;line-height:2.2;margin:1.5rem 0 2.5rem;font-weight:300;animation:fadeUp .8s .2s ease both}
+.hero-btns{display:flex;gap:14px;align-items:center;animation:fadeUp .8s .3s ease both;flex-wrap:wrap;justify-content:center}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;padding:15px 40px;background:var(--amber-light);color:#fff;font-size:14px;font-weight:500;border:none;border-radius:100px;cursor:pointer;transition:all .3s;letter-spacing:1.5px;text-decoration:none;font-family:var(--sans)}
+.btn-primary:hover{background:var(--bark);transform:translateY(-2px);box-shadow:0 16px 40px rgba(45,31,18,0.15)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:15px 36px;background:transparent;color:var(--bark-mid);font-size:14px;font-weight:400;border:1px solid rgba(45,31,18,0.15);border-radius:100px;cursor:pointer;transition:all .3s;letter-spacing:1px;text-decoration:none;font-family:var(--sans)}
+.btn-ghost:hover{border-color:var(--amber-light);color:var(--amber);background:rgba(196,154,60,0.04)}
+.scroll-indicator{position:absolute;bottom:2.5rem;display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--amber-light);font-size:10px;letter-spacing:3px;animation:float 3s infinite ease-in-out}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+.scroll-indicator .line{width:1px;height:40px;background:linear-gradient(to bottom,var(--amber-light),transparent)}
+
+/* ====== SECTION COMMON ====== */
+.section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--amber);margin-bottom:0.8rem;display:flex;align-items:center;gap:12px;font-weight:500}
+.section-label::after{content:'';flex:1;height:1px;background:rgba(196,154,60,0.2);max-width:60px}
+.section-label-center{justify-content:center}
+.section-label-center::before{content:'';width:40px;height:1px;background:rgba(196,154,60,0.2)}
+.section-title{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:var(--bark);line-height:1.45;letter-spacing:2px;margin-bottom:1rem}
+.section-desc{font-size:15px;color:var(--bark-mid);line-height:2;font-weight:300;max-width:480px}
+
+/* ====== BRAND STORY ====== */
+.story{padding:clamp(5rem,10vw,8rem) clamp(1.5rem,5vw,6rem);background:var(--cream)}
+.story-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,6vw,6rem);align-items:center}
+.story-visual{position:relative;height:clamp(340px,42vw,480px);border-radius:24px;overflow:hidden;background:linear-gradient(150deg,var(--cream-warm),rgba(196,154,60,0.08))}
+.story-visual .deco-ring{position:absolute;border-radius:50%;border:1px solid rgba(196,154,60,0.1)}
+.story-visual .deco-ring:nth-child(1){width:240px;height:240px;top:15%;left:8%}
+.story-visual .deco-ring:nth-child(2){width:160px;height:160px;top:40%;right:10%}
+.story-visual .deco-ring:nth-child(3){width:100px;height:100px;bottom:15%;left:30%}
+.story-visual .center-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:120px;height:120px;display:flex;align-items:center;justify-content:center}
+.story-visual .center-icon svg{width:100%;height:100%}
+.story-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:2rem}
+.stat-box{padding:18px 14px;background:rgba(255,255,255,0.65);border-radius:14px;border:1px solid rgba(196,154,60,0.06);text-align:center;transition:all .3s}
+.stat-box:hover{transform:translateY(-3px);box-shadow:var(--shadow-soft)}
+.stat-num{font-family:var(--display);font-size:1.6rem;font-weight:700;color:var(--amber)}
+.stat-unit{font-size:0.6em;font-weight:400}
+.stat-text{font-size:11px;color:var(--bark-mid);margin-top:4px}
+
+/* ====== TIMELINE ====== */
+.timeline-section{background:var(--cream-warm);padding:clamp(4rem,8vw,6rem) clamp(1.5rem,5vw,6rem)}
+.timeline-inner{max-width:1000px;margin:0 auto}
+.timeline-header{text-align:center;margin-bottom:3rem}
+.timeline{position:relative;padding:2rem 0}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,var(--amber-light),transparent);transform:translateX(-50%)}
+.tl-item{display:flex;align-items:flex-start;margin-bottom:2.5rem;position:relative}
+.tl-item:nth-child(odd){flex-direction:row;padding-right:calc(50% + 30px)}
+.tl-item:nth-child(even){flex-direction:row-reverse;padding-left:calc(50% + 30px)}
+.tl-dot{position:absolute;left:50%;top:8px;width:14px;height:14px;border-radius:50%;background:var(--amber-light);border:3px solid var(--cream-warm);transform:translateX(-50%);z-index:2;transition:all .3s}
+.tl-item:hover .tl-dot{transform:translateX(-50%) scale(1.3);box-shadow:0 0 0 6px rgba(196,154,60,0.15)}
+.tl-card{background:rgba(255,255,255,0.7);border-radius:var(--radius);padding:20px 24px;border:1px solid rgba(196,154,60,0.06);transition:all .3s;backdrop-filter:blur(8px);width:100%}
+.tl-card:hover{box-shadow:var(--shadow-soft);border-color:rgba(196,154,60,0.15)}
+.tl-year{font-family:var(--display);font-size:1.3rem;font-weight:700;color:var(--amber);margin-bottom:4px}
+.tl-title{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:var(--bark);margin-bottom:6px}
+.tl-desc{font-size:13px;color:var(--bark-mid);line-height:1.8}
+
+/* ====== PRODUCTS (dark) ====== */
+.products{background:var(--bark);position:relative;padding:clamp(5rem,10vw,8rem) clamp(1.5rem,5vw,6rem);overflow:hidden}
+.products::before{content:'';position:absolute;top:0;right:0;width:600px;height:600px;background:radial-gradient(circle,rgba(196,154,60,0.08) 0%,transparent 70%);pointer-events:none}
+.products-header{text-align:center;margin-bottom:4rem}
+.products-header .section-label{color:var(--amber-glow)}
+.products-header .section-title{color:var(--cream)}
+.products-header .section-desc{color:rgba(251,247,240,0.5);margin:0 auto}
+.product-tabs{display:flex;justify-content:center;gap:8px;margin-bottom:3rem;flex-wrap:wrap}
+.product-tab{padding:10px 24px;border-radius:100px;font-size:12px;color:rgba(251,247,240,0.45);background:rgba(251,247,240,0.04);border:1px solid rgba(251,247,240,0.06);cursor:pointer;transition:all .3s;font-family:var(--sans);letter-spacing:1px}
+.product-tab.active,.product-tab:hover{color:var(--amber-glow);background:rgba(196,154,60,0.1);border-color:rgba(196,154,60,0.25)}
+.product-showcase{display:flex;justify-content:center;gap:clamp(1.5rem,3vw,2.5rem);flex-wrap:wrap;margin-bottom:3rem}
+.product-card{width:clamp(280px,30vw,340px);border-radius:20px;overflow:hidden;background:rgba(251,247,240,0.04);border:1px solid rgba(251,247,240,0.06);transition:all .5s;cursor:pointer}
+.product-card:hover{transform:translateY(-8px);background:rgba(251,247,240,0.07);border-color:rgba(196,154,60,0.2);box-shadow:0 24px 60px rgba(0,0,0,0.3)}
+.card-visual{height:300px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.card-visual .glow-ring{position:absolute;width:200px;height:200px;border:1px solid rgba(196,154,60,0.08);border-radius:50%;transition:all .5s}
+.product-card:hover .glow-ring{border-color:rgba(196,154,60,0.18);transform:scale(1.1)}
+.card-c1 .card-visual{background:linear-gradient(160deg,rgba(58,107,53,0.12),rgba(58,107,53,0.03))}
+.card-c2 .card-visual{background:linear-gradient(160deg,rgba(46,139,154,0.12),rgba(46,139,154,0.03))}
+.card-c3 .card-visual{background:linear-gradient(160deg,rgba(123,94,167,0.12),rgba(123,94,167,0.03))}
+/* CSS Bottles */
+.bottle{position:relative;transition:transform .5s}
+.product-card:hover .bottle{transform:translateY(-8px)}
+.bottle-body{width:68px;height:180px;border-radius:16px 16px 10px 10px;display:flex;flex-direction:column;align-items:center;position:relative}
+.bottle-cap{width:24px;height:16px;border-radius:5px 5px 0 0;position:absolute;top:-14px;left:50%;transform:translateX(-50%)}
+.bottle-label{width:48px;padding:12px 5px;background:rgba(255,255,255,0.92);border-radius:6px;text-align:center;margin-top:44px;font-family:var(--serif);font-size:7px;color:var(--bark);line-height:1.5;font-weight:600;letter-spacing:0.5px}
+.bc-green .bottle-body{background:linear-gradient(180deg,#5A9B55,#3A6B35)}.bc-green .bottle-cap{background:#2D5016}
+.bc-teal .bottle-body{background:linear-gradient(180deg,#4AABBA,#2E8B9A)}.bc-teal .bottle-cap{background:#1A6B7A}
+.bc-violet .bottle-body{background:linear-gradient(180deg,#9B7EC7,#7B5EA7)}.bc-violet .bottle-cap{background:#5A3E87}
+
+.card-body{padding:24px 26px 30px}
+.card-tag{display:inline-block;padding:4px 14px;border-radius:100px;font-size:10px;font-weight:500;margin-bottom:12px;letter-spacing:1px}
+.card-c1 .card-tag{background:rgba(58,107,53,0.15);color:#5A9B55}
+.card-c2 .card-tag{background:rgba(46,139,154,0.15);color:#4AABBA}
+.card-c3 .card-tag{background:rgba(123,94,167,0.15);color:#9B7EC7}
+.card-name{font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--cream);margin-bottom:8px;letter-spacing:1px}
+.card-desc{font-size:12px;color:rgba(251,247,240,0.4);line-height:1.9;margin-bottom:14px}
+.card-features{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.card-feat{padding:3px 10px;border-radius:6px;font-size:10px;color:rgba(251,247,240,0.35);background:rgba(251,247,240,0.04);border:1px solid rgba(251,247,240,0.06)}
+.card-price{display:flex;align-items:baseline;gap:8px}
+.card-price .now{font-family:var(--display);font-size:1.3rem;font-weight:700;color:var(--amber-glow)}
+.card-price .orig{font-size:12px;color:rgba(251,247,240,0.2);text-decoration:line-through}
+.card-price .vol{font-size:11px;color:rgba(251,247,240,0.25)}
+
+.product-specs{max-width:900px;margin:0 auto;padding:2.5rem 0}
+.specs-title{font-family:var(--serif);font-size:1.1rem;color:var(--cream);text-align:center;margin-bottom:1.5rem;letter-spacing:2px}
+.specs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.spec-item{text-align:center;padding:20px 12px;background:rgba(251,247,240,0.03);border-radius:14px;border:1px solid rgba(251,247,240,0.04);transition:all .3s}
+.spec-item:hover{background:rgba(251,247,240,0.06);border-color:rgba(196,154,60,0.12)}
+.spec-val{font-family:var(--display);font-size:1.1rem;font-weight:700;color:var(--amber-glow)}
+.spec-name{font-size:11px;color:rgba(251,247,240,0.35);margin-top:4px}
+
+/* ====== BENEFITS ====== */
+.benefits{background:#fff;padding:clamp(5rem,10vw,8rem) clamp(1.5rem,5vw,6rem)}
+.benefits-inner{max-width:1140px;margin:0 auto}
+.benefits-hero{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,6vw,6rem);align-items:start;margin-bottom:4rem}
+.benefits-metric{position:relative}
+.benefits-big-num{font-family:var(--display);font-size:clamp(6rem,14vw,10rem);font-weight:700;color:rgba(196,154,60,0.07);line-height:1;text-align:right}
+.benefits-big-label{font-size:13px;color:var(--bark-light);text-align:right;margin-top:-0.5rem}
+.benefits-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.benefit-card{padding:clamp(22px,3vw,34px);background:var(--cream);border-radius:18px;border:1px solid rgba(0,0,0,0.04);transition:all .4s;position:relative;overflow:hidden}
+.benefit-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift);border-color:rgba(196,154,60,0.1)}
+.benefit-card::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;opacity:0.04;pointer-events:none}
+.benefit-card:nth-child(1)::before{background:var(--sage)}.benefit-card:nth-child(2)::before{background:var(--amber-light)}.benefit-card:nth-child(3)::before{background:var(--teal)}.benefit-card:nth-child(4)::before{background:var(--violet)}
+.b-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px}
+.benefit-card:nth-child(1) .b-icon{background:var(--sage-light);color:var(--sage)}
+.benefit-card:nth-child(2) .b-icon{background:rgba(196,154,60,0.1);color:var(--amber)}
+.benefit-card:nth-child(3) .b-icon{background:var(--teal-light);color:var(--teal)}
+.benefit-card:nth-child(4) .b-icon{background:var(--violet-light);color:var(--violet)}
+.benefit-card h4{font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--bark);margin-bottom:8px;letter-spacing:1px}
+.benefit-card p{font-size:13px;color:var(--bark-mid);line-height:1.9;font-weight:300}
+.benefit-pill{display:inline-block;margin-top:14px;padding:5px 16px;border-radius:100px;font-family:var(--display);font-size:11px;font-weight:700}
+.benefit-card:nth-child(1) .benefit-pill{background:var(--sage-light);color:var(--sage)}
+.benefit-card:nth-child(2) .benefit-pill{background:rgba(196,154,60,0.1);color:var(--amber)}
+.benefit-card:nth-child(3) .benefit-pill{background:var(--teal-light);color:var(--teal)}
+.benefit-card:nth-child(4) .benefit-pill{background:var(--violet-light);color:var(--violet)}
+
+/* ====== TECH ====== */
+.tech{background:var(--cream-warm);padding:clamp(5rem,10vw,8rem) clamp(1.5rem,5vw,6rem)}
+.tech-inner{max-width:1100px;margin:0 auto}
+.tech-header{text-align:center;margin-bottom:3.5rem}
+.tech-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.tech-card{padding:clamp(26px,3vw,38px);background:rgba(255,255,255,0.7);border-radius:18px;border:1px solid rgba(196,154,60,0.06);transition:all .4s;backdrop-filter:blur(8px)}
+.tech-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lift);background:rgba(255,255,255,0.92);border-color:rgba(196,154,60,0.15)}
+.tech-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:22px;font-size:24px}
+.tech-card:nth-child(1) .tech-icon{background:rgba(58,107,53,0.1);color:var(--sage)}
+.tech-card:nth-child(2) .tech-icon{background:rgba(196,154,60,0.1);color:var(--amber)}
+.tech-card:nth-child(3) .tech-icon{background:rgba(46,139,154,0.1);color:var(--teal)}
+.tech-card h3{font-family:var(--serif);font-size:1.05rem;color:var(--bark);margin-bottom:10px;font-weight:600;letter-spacing:1px}
+.tech-card p{font-size:13px;line-height:1.9;color:var(--bark-mid);font-weight:300}
+.tech-metric{display:inline-block;margin-top:16px;padding:6px 18px;border-radius:100px;font-family:var(--display);font-size:12px;font-weight:700;background:rgba(196,154,60,0.08);color:var(--amber)}
+.tech-detail{max-width:1100px;margin:2.5rem auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tech-detail-item{text-align:center;padding:20px;background:rgba(255,255,255,0.5);border-radius:14px;border:1px solid rgba(0,0,0,0.03)}
+.td-val{font-family:var(--display);font-size:1.4rem;font-weight:700;color:var(--amber)}
+.td-label{font-size:12px;color:var(--bark-mid);margin-top:4px}
+.td-compare{font-size:11px;color:var(--bark-light);margin-top:2px}
+
+/* ====== TRUST / PROOF ====== */
+.trust{background:var(--cream);padding:clamp(5rem,10vw,8rem) clamp(1.5rem,5vw,6rem)}
+.trust-inner{max-width:1000px;margin:0 auto}
+.trust-header{text-align:center;margin-bottom:3rem}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:2.5rem}
+.trust-card{padding:28px 18px;background:rgba(255,255,255,0.6);border-radius:var(--radius);border:1px solid rgba(196,154,60,0.04);text-align:center;transition:all .3s}
+.trust-card:hover{background:rgba(255,255,255,0.95);transform:translateY(-3px);box-shadow:var(--shadow-soft)}
+.trust-num{font-family:var(--display);font-size:2rem;font-weight:700;color:var(--amber)}
+.trust-unit{font-size:12px;color:var(--amber);font-weight:500}
+.trust-label{font-size:12px;color:var(--bark-mid);margin-top:6px}
+.cert-list{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:2rem}
+.cert-item{padding:20px;background:rgba(255,255,255,0.5);border-radius:14px;border:1px solid rgba(0,0,0,0.03);transition:all .3s}
+.cert-item:hover{background:rgba(255,255,255,0.9);box-shadow:var(--shadow-soft)}
+.cert-item .cert-type{font-size:10px;color:var(--amber);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;font-weight:500}
+.cert-item .cert-name{font-family:var(--serif);font-size:0.9rem;color:var(--bark);font-weight:600}
+.media-strip{display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;margin-top:2rem}
+.media-badge{padding:8px 20px;background:rgba(255,255,255,0.5);border-radius:8px;font-size:11px;color:var(--bark-light);letter-spacing:1px;border:1px solid rgba(0,0,0,0.04);transition:all .3s}
+.media-badge:hover{background:rgba(255,255,255,0.9);color:var(--amber);border-color:rgba(196,154,60,0.15)}
+
+/* ====== COMPETITORS ====== */
+.compare{background:var(--cream-warm);padding:clamp(4rem,8vw,6rem) clamp(1.5rem,5vw,6rem)}
+.compare-inner{max-width:1000px;margin:0 auto}
+.compare-header{text-align:center;margin-bottom:2.5rem}
+.compare-table{width:100%;border-collapse:separate;border-spacing:0;border-radius:18px;overflow:hidden;box-shadow:var(--shadow-soft)}
+.compare-table th,.compare-table td{padding:16px 18px;text-align:center;font-size:13px;border-bottom:1px solid rgba(0,0,0,0.04)}
+.compare-table thead th{background:var(--bark);color:var(--cream);font-weight:500;letter-spacing:1px;font-size:12px}
+.compare-table thead th:last-child{background:var(--amber);color:#fff}
+.compare-table tbody td{background:rgba(255,255,255,0.6);color:var(--bark-mid);font-weight:300}
+.compare-table tbody td:first-child{font-weight:500;color:var(--bark);text-align:left;background:rgba(255,255,255,0.8)}
+.compare-table tbody td:last-child{background:rgba(196,154,60,0.06);color:var(--amber);font-weight:500}
+.compare-table tbody tr:hover td{background:rgba(255,255,255,0.9)}
+.compare-table tbody tr:hover td:last-child{background:rgba(196,154,60,0.12)}
+
+/* ====== REVIEWS ====== */
+.reviews{background:#fff;padding:clamp(4rem,8vw,6rem) clamp(1.5rem,5vw,6rem)}
+.reviews-inner{max-width:1000px;margin:0 auto}
+.reviews-header{text-align:center;margin-bottom:3rem}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.review-card{padding:28px;background:var(--cream);border-radius:18px;border:1px solid rgba(0,0,0,0.04);transition:all .3s}
+.review-card:hover{box-shadow:var(--shadow-soft);transform:translateY(-3px)}
+.review-stars{color:var(--amber-light);font-size:14px;margin-bottom:12px;letter-spacing:2px}
+.review-text{font-size:14px;color:var(--bark-mid);line-height:1.9;font-weight:300;margin-bottom:16px;font-style:italic}
+.review-author{display:flex;align-items:center;gap:12px}
+.review-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:#fff}
+.review-card:nth-child(1) .review-avatar{background:var(--sage)}
+.review-card:nth-child(2) .review-avatar{background:var(--amber-light)}
+.review-card:nth-child(3) .review-avatar{background:var(--teal)}
+.review-name{font-size:13px;font-weight:500;color:var(--bark)}
+.review-meta{font-size:11px;color:var(--bark-light)}
+
+/* ====== FAQ ====== */
+.faq{background:var(--cream);padding:clamp(4rem,8vw,6rem) clamp(1.5rem,5vw,6rem)}
+.faq-inner{max-width:760px;margin:0 auto}
+.faq-header{text-align:center;margin-bottom:2.5rem}
+.faq-item{border-bottom:1px solid rgba(0,0,0,0.06);overflow:hidden}
+.faq-q{padding:20px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:var(--serif);font-size:0.95rem;font-weight:600;color:var(--bark);transition:color .3s;letter-spacing:0.5px}
+.faq-q:hover{color:var(--amber)}
+.faq-q .arrow{width:24px;height:24px;border-radius:50%;background:rgba(196,154,60,0.08);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--amber);transition:all .3s;flex-shrink:0}
+.faq-item.open .faq-q .arrow{transform:rotate(180deg);background:var(--amber-light);color:#fff}
+.faq-a{max-height:0;transition:max-height .4s ease,padding .3s;overflow:hidden;font-size:14px;color:var(--bark-mid);line-height:2;font-weight:300}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:20px}
+
+/* ====== SOCIAL PROOF STRIP ====== */
+.social-strip{background:var(--bark);padding:3rem clamp(1.5rem,5vw,6rem)}
+.social-inner{max-width:1000px;margin:0 auto;display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:2rem}
+.social-stat{text-align:center}
+.social-num{font-family:var(--display);font-size:2rem;font-weight:700;color:var(--amber-glow)}
+.social-label{font-size:12px;color:rgba(251,247,240,0.4);margin-top:4px}
+
+/* ====== CTA ====== */
+.final-cta{background:linear-gradient(160deg,var(--amber) 0%,#7A5510 50%,var(--bark) 100%);text-align:center;color:#fff;padding:clamp(5rem,10vw,7rem) 2rem;position:relative;overflow:hidden}
+.final-cta::before{content:'';position:absolute;top:-150px;right:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,0.04) 0%,transparent 60%);pointer-events:none}
+.final-cta::after{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(196,154,60,0.08) 0%,transparent 60%);pointer-events:none}
+.final-cta h2{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;margin-bottom:1rem;letter-spacing:3px;position:relative}
+.final-cta .sub{font-size:15px;opacity:0.6;max-width:480px;margin:0 auto 2.5rem;line-height:2;font-weight:300;position:relative}
+.cta-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;position:relative}
+.btn-white{display:inline-flex;align-items:center;gap:10px;padding:16px 44px;background:#fff;color:var(--amber);font-family:var(--sans);font-size:15px;font-weight:500;border:none;border-radius:100px;cursor:pointer;transition:all .3s;text-decoration:none;letter-spacing:1px}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,0,0,0.2)}
+.btn-outline-white{display:inline-flex;align-items:center;gap:8px;padding:16px 36px;background:transparent;color:rgba(255,255,255,0.8);font-family:var(--sans);font-size:14px;font-weight:400;border:1px solid rgba(255,255,255,0.2);border-radius:100px;cursor:pointer;transition:all .3s;text-decoration:none;letter-spacing:1px}
+.btn-outline-white:hover{border-color:rgba(255,255,255,0.5);color:#fff;background:rgba(255,255,255,0.06)}
+.contact-grid{max-width:800px;margin:3rem auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;position:relative}
+.contact-item{text-align:center;padding:20px;background:rgba(255,255,255,0.05);border-radius:14px;border:1px solid rgba(255,255,255,0.06)}
+.contact-item .ci-icon{font-size:22px;margin-bottom:8px}
+.contact-item .ci-label{font-size:11px;color:rgba(255,255,255,0.35);margin-bottom:4px;letter-spacing:1px;text-transform:uppercase}
+.contact-item .ci-val{font-size:14px;color:rgba(255,255,255,0.8)}
+
+/* ====== FOOTER ====== */
+footer{background:var(--bark);color:rgba(251,247,240,0.4);padding:2.5rem clamp(1.5rem,5vw,6rem)}
+.footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr 1fr;gap:2rem;align-items:start}
+.footer-brand{font-family:var(--serif);font-size:1.4rem;color:var(--cream);font-weight:700;letter-spacing:8px}
+.footer-brand small{display:block;font-size:10px;color:rgba(251,247,240,0.3);font-weight:300;letter-spacing:2px;margin-top:8px;font-family:var(--sans)}
+.footer-links{display:flex;gap:3rem;justify-content:center}
+.footer-col h4{font-size:11px;color:rgba(251,247,240,0.5);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;font-weight:500}
+.footer-col a{display:block;font-size:13px;color:rgba(251,247,240,0.35);text-decoration:none;margin-bottom:8px;transition:color .2s}
+.footer-col a:hover{color:var(--amber-glow)}
+.footer-right{text-align:right}
+.footer-social{display:flex;gap:10px;justify-content:flex-end;margin-bottom:12px}
+.footer-social a{width:34px;height:34px;border-radius:8px;background:rgba(251,247,240,0.04);border:1px solid rgba(251,247,240,0.06);display:flex;align-items:center;justify-content:center;font-size:14px;text-decoration:none;transition:all .3s;color:rgba(251,247,240,0.4)}
+.footer-social a:hover{background:rgba(196,154,60,0.1);border-color:rgba(196,154,60,0.25);color:var(--amber-glow)}
+.footer-bottom{max-width:1100px;margin:2rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(251,247,240,0.06);display:flex;justify-content:space-between;align-items:center;font-size:11px;color:rgba(251,247,240,0.25)}
+.footer-bottom a{color:rgba(251,247,240,0.3);text-decoration:none;transition:color .2s}
+.footer-bottom a:hover{color:var(--amber-glow)}
+
+/* ====== SCROLL ANIMATIONS ====== */
+.reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.23,1,.32,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}
+
+/* ====== RESPONSIVE ====== */
+@media(max-width:900px){
+  .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(251,247,240,0.98);flex-direction:column;justify-content:center;align-items:center;gap:2rem;backdrop-filter:blur(20px)}
+  .nav-links.open{display:flex}
+  .mobile-toggle{display:block}
+  .story-grid,.benefits-hero{grid-template-columns:1fr}
+  .story-visual{height:280px}
+  .tech-cards{grid-template-columns:1fr}
+  .trust-grid{grid-template-columns:1fr 1fr}
+  .cert-list{grid-template-columns:1fr}
+  .benefits-grid{grid-template-columns:1fr}
+  .product-showcase{flex-direction:column;align-items:center}
+  .product-card{width:min(340px,92vw)}
+  .specs-grid{grid-template-columns:1fr 1fr}
+  .reviews-grid{grid-template-columns:1fr}
+  .compare-table{font-size:11px}
+  .compare-table th,.compare-table td{padding:10px 8px}
+  .timeline::before{left:20px}
+  .tl-item:nth-child(odd),.tl-item:nth-child(even){flex-direction:row;padding-right:0;padding-left:50px}
+  .tl-dot{left:20px}
+  .footer-inner{grid-template-columns:1fr}
+  .footer-links{justify-content:flex-start}
+  .footer-right{text-align:left}
+  .footer-social{justify-content:flex-start}
+  .footer-bottom{flex-direction:column;gap:8px;text-align:center}
+  .contact-grid{grid-template-columns:1fr}
+  .social-inner{flex-direction:column}
+  .tech-detail{grid-template-columns:1fr}
+  .benefits-big-num{text-align:left;font-size:6rem}
+  .benefits-big-label{text-align:left}
+}
+
+/* ====== BACK TO TOP ====== */
+.back-top{position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;border-radius:50%;background:var(--amber-light);color:#fff;border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(20px);transition:all .3s;z-index:99;box-shadow:0 4px 16px rgba(196,154,60,0.3)}
+.back-top.show{opacity:1;transform:translateY(0)}
+.back-top:hover{background:var(--bark);transform:translateY(-2px)}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="mainNav">
+  <a href="#" class="nav-logo">沐然<small>MURAN</small></a>
+  <div class="nav-links" id="navLinks">
+    <a href="#story">品牌故事</a>
+    <a href="#products">产品系列</a>
+    <a href="#benefits">核心优势</a>
+    <a href="#tech">技术壁垒</a>
+    <a href="#trust">品牌背书</a>
+    <a href="#compare">竞品对比</a>
+    <a href="#faq">常见问题</a>
+    <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">立即选购</button>
+  </div>
+  <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-deco"></div>
+  <div class="hero-deco"></div>
+  <div class="hero-deco"></div>
+  <div class="hero-badge"><span class="dot"></span>COSMOS 国际有机原材料认证</div>
+  <h1>沐然<span class="en">Natural Soapberry Haircare by Sanponin</span></h1>
+  <p class="hero-sub">基于无患子提取物 Sanponin 的自然洗护系列<br>千年古方 · 科技赋能 · 助农兴乡</p>
+  <div class="hero-btns">
+    <a href="#products" class="btn-primary">探索产品系列 →</a>
+    <a href="#story" class="btn-ghost">了解品牌故事</a>
+  </div>
+  <div class="scroll-indicator">SCROLL<div class="line"></div></div>
+</section>
+
+<!-- ===== BRAND STORY ===== -->
+<section class="story" id="story">
+  <div class="story-grid">
+    <div class="reveal">
+      <div class="section-label">Brand Story · 品牌故事</div>
+      <h2 class="section-title">天然无患子<br>让洗护回归本真</h2>
+      <p class="section-desc">2023年，项目负责人李诗宇在福建省建宁县亲眼目睹无患子果农因深加工匮乏、产品滞销的困境——16亩无患子果树年收入仅9.2万元。这一发现触发了"古方焕新"的创业思考。</p>
+      <p class="section-desc" style="margin-top:1rem">沐然团队深入四省产区实地走访，收集1087份消费者调研问卷，深度访谈107位用户，走访14家相关企业，历经三年潜心研发，将《本草图经》中记载的千年古方与现代生物科技融合。</p>
+      <div class="story-stats">
+        <div class="stat-box"><div class="stat-num">3<span class="stat-unit">年</span></div><div class="stat-text">研发周期</div></div>
+        <div class="stat-box"><div class="stat-num">4<span class="stat-unit">省</span></div><div class="stat-text">实地走访</div></div>
+        <div class="stat-box"><div class="stat-num">1087<span class="stat-unit">份</span></div><div class="stat-text">调研问卷</div></div>
+      </div>
+    </div>
+    <div class="story-visual reveal reveal-d1">
+      <div class="deco-ring"></div>
+      <div class="deco-ring"></div>
+      <div class="deco-ring"></div>
+      <div class="center-icon">
+        <svg viewBox="0 0 120 120" fill="none">
+          <circle cx="60" cy="60" r="36" fill="#C49A3C" opacity="0.2"/>
+          <circle cx="60" cy="60" r="24" fill="#C49A3C" opacity="0.4"/>
+          <circle cx="60" cy="60" r="14" fill="#C49A3C"/>
+          <path d="M60 24 Q68 10 60 0 Q52 10 60 24Z" fill="#3A6B35" opacity="0.7"/>
+          <path d="M60 24 Q72 12 82 4 Q70 14 60 24Z" fill="#5A9B55" opacity="0.5"/>
+          <line x1="60" y1="4" x2="60" y2="24" stroke="#3A6B35" stroke-width="1" opacity="0.5"/>
+          <text x="60" y="64" text-anchor="middle" font-family="Noto Serif SC" font-size="8" fill="#fff" font-weight="600">无患子</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TIMELINE ===== -->
+<section class="timeline-section" id="timeline">
+  <div class="timeline-inner">
+    <div class="timeline-header reveal">
+      <div class="section-label section-label-center">Development · 发展历程</div>
+      <h2 class="section-title" style="text-align:center">攻坚克难，砥砺突破</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-year">2023</div>
+          <div class="tl-title">初心缘起</div>
+          <div class="tl-desc">建宁县之行发现无患子滞销困境，触发古方焕新的创业思考，开始组建团队</div>
+        </div>
+      </div>
+      <div class="tl-item reveal reveal-d1">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-year">2023-2024</div>
+          <div class="tl-title">深入调研 · 锁定痛点</div>
+          <div class="tl-desc">走访4省14家企业，收集1087份问卷，深度访谈107人，锁定化学洗护三大市场痛点</div>
+        </div>
+      </div>
+      <div class="tl-item reveal reveal-d2">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-year">2024-2025</div>
+          <div class="tl-title">技术攻坚 · 182天突破</div>
+          <div class="tl-desc">突破三项核心技术——复合酶解定向提取、pH响应型脂质体包载、菌群共代谢微生态发酵</div>
+        </div>
+      </div>
+      <div class="tl-item reveal reveal-d3">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-year">2025</div>
+          <div class="tl-title">成果落地 · 品牌启航</div>
+          <div class="tl-desc">与5家企业达成合作，意向订单金额达260万元，计划2025年9月正式注册公司</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCTS ===== -->
+<section class="products" id="products">
+  <div class="products-header reveal">
+    <div class="section-label section-label-center">Products · 产品系列</div>
+    <h2 class="section-title">三瓶解决<br>所有头皮问题</h2>
+    <p class="section-desc">无患子天然皂苷 × 三大核心生物技术<br>精准匹配不同头皮诉求</p>
+  </div>
+  <div class="product-tabs reveal">
+    <button class="product-tab active">全部产品</button>
+    <button class="product-tab">修复养护</button>
+    <button class="product-tab">清爽控油</button>
+    <button class="product-tab">去屑舒缓</button>
+  </div>
+  <div class="product-showcase">
+    <div class="product-card card-c1 reveal">
+      <div class="card-visual">
+        <div class="glow-ring"></div>
+        <div class="bottle bc-green">
+          <div class="bottle-body"><div class="bottle-cap"></div><div class="bottle-label">沐然<br>柔润修复</div></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">修复养护</div>
+        <div class="card-name">沐然无患子柔润修复洗发乳</div>
+        <p class="card-desc">深层滋养受损发丝，修复毛鳞片，28天角质层含水量增加28%，恢复自然光泽与弹性</p>
+        <div class="card-features">
+          <span class="card-feat">柔顺修复</span>
+          <span class="card-feat">滋养发丝</span>
+          <span class="card-feat">持久保湿</span>
+        </div>
+        <div class="card-price"><span class="now">¥59</span><span class="orig">¥89</span><span class="vol">/500ml</span></div>
+      </div>
+    </div>
+    <div class="product-card card-c2 reveal reveal-d1">
+      <div class="card-visual">
+        <div class="glow-ring"></div>
+        <div class="bottle bc-teal">
+          <div class="bottle-body"><div class="bottle-cap"></div><div class="bottle-label">沐然<br>净澈控油</div></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">清爽净化</div>
+        <div class="card-name">沐然无患子净澈控油洗发露</div>
+        <p class="card-desc">温和净化多余油脂，洗后24小时出油量减少42%，控油效果维持36-48小时</p>
+        <div class="card-features">
+          <span class="card-feat">深层控油</span>
+          <span class="card-feat">平衡水油</span>
+          <span class="card-feat">清爽不绷</span>
+        </div>
+        <div class="card-price"><span class="now">¥49</span><span class="orig">¥79</span><span class="vol">/500ml</span></div>
+      </div>
+    </div>
+    <div class="product-card card-c3 reveal reveal-d2">
+      <div class="card-visual">
+        <div class="glow-ring"></div>
+        <div class="bottle bc-violet">
+          <div class="bottle-body"><div class="bottle-cap"></div><div class="bottle-label">沐然<br>植御去屑</div></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">去屑舒缓</div>
+        <div class="card-name">沐然无患子植御去屑洗发露</div>
+        <p class="card-desc">植物抑菌因子靶向去屑，7天头屑减少78%，屑抑制效果维持4-5天，还原健康微生态</p>
+        <div class="card-features">
+          <span class="card-feat">靶向去屑</span>
+          <span class="card-feat">舒缓敏感</span>
+          <span class="card-feat">调节菌群</span>
+        </div>
+        <div class="card-price"><span class="now">¥49</span><span class="orig">¥79</span><span class="vol">/500ml</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-specs reveal">
+    <div class="specs-title">产品核心参数</div>
+    <div class="specs-grid">
+      <div class="spec-item"><div class="spec-val">pH 5.5-6.0</div><div class="spec-name">弱酸性配方</div></div>
+      <div class="spec-item"><div class="spec-val">90%+</div><div class="spec-name">活性成分保留率</div></div>
+      <div class="spec-item"><div class="spec-val">12个月</div><div class="spec-name">常温储存稳定</div></div>
+      <div class="spec-item"><div class="spec-val">100%</div><div class="spec-name">可生物降解</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BENEFITS ===== -->
+<section class="benefits" id="benefits">
+  <div class="benefits-inner">
+    <div class="benefits-hero">
+      <div class="reveal">
+        <div class="section-label">Why Muran · 核心优势</div>
+        <h2 class="section-title">为什么选沐然？</h2>
+        <p class="section-desc">四大核心优势，让头皮回归健康本态。科技赋能天然成分，每一滴都经得起检验。</p>
+      </div>
+      <div class="benefits-metric reveal reveal-d1">
+        <div class="benefits-big-num">73%</div>
+        <div class="benefits-big-label">马拉色菌抑制率</div>
+      </div>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal">
+        <div class="b-icon">⚗</div>
+        <h4>成分天然</h4>
+        <p>无患子皂苷为核心活性成分，原材料通过 COSMOS 国际有机认证，90%高纯度无患子皂苷，从源头保证安全与纯净</p>
+        <div class="benefit-pill">皂苷释放量 180mg/mL</div>
+      </div>
+      <div class="benefit-card reveal reveal-d1">
+        <div class="b-icon">◎</div>
+        <h4>科技赋能</h4>
+        <p>pH 响应型脂质体包载技术，活性成分在头皮弱酸环境下精准释放，活性物质释放效率大幅提升</p>
+        <div class="benefit-pill">释放效率 +23.6%</div>
+      </div>
+      <div class="benefit-card reveal reveal-d2">
+        <div class="b-icon">⟴</div>
+        <h4>多效合一</h4>
+        <p>修复 · 控油 · 去屑三线覆盖，菌群共代谢微生态发酵工艺，从根源解决头皮问题。头皮敏感泛红改善率89%，头屑复发率降低76%</p>
+        <div class="benefit-pill">抑菌圈直径 12mm</div>
+      </div>
+      <div class="benefit-card reveal reveal-d3">
+        <div class="b-icon">♻</div>
+        <h4>环保友好</h4>
+        <p>天然皂苷100%可生物降解，无污染代谢。联合福建建宁产区农户助农增收，践行"青山变金山"的可持续发展理念</p>
+        <div class="benefit-pill">助农增收 104万元</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TECH ===== -->
+<section class="tech" id="tech">
+  <div class="tech-inner">
+    <div class="tech-header reveal">
+      <div class="section-label section-label-center">Core Technology · 技术壁垒</div>
+      <h2 class="section-title" style="text-align:center">三大核心技术壁垒</h2>
+      <p class="section-desc" style="text-align:center;margin:0.5rem auto 0">4项软件著作权 · 1项实用新型专利 · 2项在申专利</p>
+    </div>
+    <div class="tech-cards">
+      <div class="tech-card reveal">
+        <div class="tech-icon">⚗</div>
+        <h3>复合酶解定向提取</h3>
+        <p>优化纤维素酶与果胶酶配比，运行超速离心，深度释放皂苷。突破传统水提法仅12%的皂苷得率瓶颈，多酚黄酮保留率提升至40%</p>
+        <div class="tech-metric">皂苷释放量 180mg/mL</div>
+      </div>
+      <div class="tech-card reveal reveal-d1">
+        <div class="tech-icon">◎</div>
+        <h3>pH响应型脂质体包载</h3>
+        <p>大豆磷脂与胆固醇3:1构建脂质体，壳聚糖修饰后实现pH 5.5时精准崩解释放，活性物质释放效率提升23.6%</p>
+        <div class="tech-metric">释放效率 +23.6%</div>
+      </div>
+      <div class="tech-card reveal reveal-d2">
+        <div class="tech-icon">⟴</div>
+        <h3>菌群共代谢微生态发酵</h3>
+        <p>布拉迪酵母菌与植物乳杆菌协同发酵，产生小分子肽与有机酸，调节头皮pH至5.5-6.0度，菌群多样性指数提升67%</p>
+        <div class="tech-metric">马拉色菌减少 73%</div>
+      </div>
+    </div>
+    <div class="tech-detail reveal">
+      <div class="tech-detail-item">
+        <div class="td-val">84%</div>
+        <div class="td-label">头皮油脂清除率</div>
+        <div class="td-compare">第三方实验室检测</div>
+      </div>
+      <div class="tech-detail-item">
+        <div class="td-val">89%</div>
+        <div class="td-label">敏感泛红改善率</div>
+        <div class="td-compare">临床测试数据</div>
+      </div>
+      <div class="tech-detail-item">
+        <div class="td-val">76%</div>
+        <div class="td-label">头屑复发率降低</div>
+        <div class="td-compare">临床测试数据</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST ===== -->
+<section class="trust" id="trust">
+  <div class="trust-inner">
+    <div class="trust-header reveal">
+      <div class="section-label section-label-center">Brand Trust · 品牌背书</div>
+      <h2 class="section-title" style="text-align:center">品牌实力背书</h2>
+    </div>
+    <div class="trust-grid reveal">
+      <div class="trust-card"><div class="trust-num">4</div><div class="trust-unit">项</div><div class="trust-label">软件著作权</div></div>
+      <div class="trust-card"><div class="trust-num">3</div><div class="trust-unit">项</div><div class="trust-label">专利（含在申）</div></div>
+      <div class="trust-card"><div class="trust-num">9</div><div class="trust-unit">项</div><div class="trust-label">权威检测报告</div></div>
+      <div class="trust-card"><div class="trust-num">12</div><div class="trust-unit">次</div><div class="trust-label">权威媒体报道</div></div>
+    </div>
+    <div class="cert-list reveal">
+      <div class="cert-item"><div class="cert-type">标准体系认证</div><div class="cert-name">COSMOS 国际有机原材料符合性证明</div></div>
+      <div class="cert-item"><div class="cert-type">质量检测</div><div class="cert-name">国联质检检测报告（CMA认证）</div></div>
+      <div class="cert-item"><div class="cert-type">检测声明</div><div class="cert-name">非转基因声明 · 残留溶剂声明</div></div>
+      <div class="cert-item"><div class="cert-type">技术说明</div><div class="cert-name">Sanponin II 技术说明书</div></div>
+      <div class="cert-item"><div class="cert-type">安全认证</div><div class="cert-name">化学品安全技术说明书（MSDS）</div></div>
+      <div class="cert-item"><div class="cert-type">用户验证</div><div class="cert-name">50名用户签署知情同意书实测</div></div>
+    </div>
+    <div class="media-strip reveal">
+      <div class="media-badge">光明网</div>
+      <div class="media-badge">中国日报</div>
+      <div class="media-badge">中华网</div>
+      <div class="media-badge">凤凰网</div>
+      <div class="media-badge">四川时报</div>
+      <div class="media-badge">中国青年网</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPARE ===== -->
+<section class="compare" id="compare">
+  <div class="compare-inner">
+    <div class="compare-header reveal">
+      <div class="section-label section-label-center">Comparison · 竞品对比</div>
+      <h2 class="section-title" style="text-align:center">优势卓显，比析胜彰</h2>
+    </div>
+    <div class="reveal">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>对比维度</th>
+            <th>滋源</th>
+            <th>HAIR BORIST</th>
+            <th>MILLER DAZZLE</th>
+            <th>沐然 ★</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>核心功效</td>
+            <td>控油抑屑</td>
+            <td>清洁头皮 柔化头发</td>
+            <td>平衡油脂 清洁洗护</td>
+            <td>控油去屑净爽 修护润色焕亮</td>
+          </tr>
+          <tr>
+            <td>活性成分</td>
+            <td>无患子、菊粉、姜根</td>
+            <td>无患子、益生元、芦荟</td>
+            <td>无患子、五味子精华</td>
+            <td>90%高纯度无患子皂苷 纤维素酶 果胶酶</td>
+          </tr>
+          <tr>
+            <td>核心技术</td>
+            <td>益生元复配体系</td>
+            <td>传统提取工艺</td>
+            <td>微米泡沫技术</td>
+            <td>复合酶解 + pH脂质体 + 微生态发酵</td>
+          </tr>
+          <tr>
+            <td>适用人群</td>
+            <td>防脱、油性头皮</td>
+            <td>脱发、过敏体质</td>
+            <td>敏感人群 主打男士</td>
+            <td>全头皮类型覆盖</td>
+          </tr>
+          <tr>
+            <td>产品售价</td>
+            <td>¥79.9/535ml</td>
+            <td>¥344/500ml</td>
+            <td>¥229/500ml</td>
+            <td>¥39-59/500ml</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REVIEWS ===== -->
+<section class="reviews" id="reviews">
+  <div class="reviews-inner">
+    <div class="reviews-header reveal">
+      <div class="section-label section-label-center">Reviews · 用户评价</div>
+      <h2 class="section-title" style="text-align:center">用户真实反馈</h2>
+      <p class="section-desc" style="text-align:center;margin:0.5rem auto 0">产品经50名签署知情同意书用户实测，效果良好且无不良反馈</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"用了两周感觉头皮油脂明显减少了，以前下午就开始出油，现在到晚上头发都还蓬松。天然成分用着很安心。"</p>
+        <div class="review-author">
+          <div class="review-avatar">陈</div>
+          <div><div class="review-name">陈女士</div><div class="review-meta">使用净澈控油款 · 28天</div></div>
+        </div>
+      </div>
+      <div class="review-card reveal reveal-d1">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"头屑问题困扰我好几年了，用过很多品牌都反复。这款去屑洗发露用了一周就有明显改善，没有刺激感。"</p>
+        <div class="review-author">
+          <div class="review-avatar">李</div>
+          <div><div class="review-name">李先生</div><div class="review-meta">使用植御去屑款 · 14天</div></div>
+        </div>
+      </div>
+      <div class="review-card reveal reveal-d2">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"之前用化学洗发水头皮总是泛红敏感，换了沐然之后敏感问题缓解了很多，头发也变得更有光泽了。"</p>
+        <div class="review-author">
+          <div class="review-avatar">王</div>
+          <div><div class="review-name">王女士</div><div class="review-meta">使用柔润修复款 · 30天</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOCIAL STRIP ===== -->
+<div class="social-strip">
+  <div class="social-inner">
+    <div class="social-stat"><div class="social-num">260万</div><div class="social-label">意向订单金额</div></div>
+    <div class="social-stat"><div class="social-num">5家</div><div class="social-label">合作企业</div></div>
+    <div class="social-stat"><div class="social-num">50+</div><div class="social-label">实测用户</div></div>
+    <div class="social-stat"><div class="social-num">326亩</div><div class="social-label">帮扶种植面积</div></div>
+    <div class="social-stat"><div class="social-num">58人</div><div class="social-label">带动就业</div></div>
+  </div>
+</div>
+
+<!-- ===== FAQ ===== -->
+<section class="faq" id="faq">
+  <div class="faq-inner">
+    <div class="faq-header reveal">
+      <div class="section-label section-label-center">FAQ · 常见问题</div>
+      <h2 class="section-title" style="text-align:center">常见问题解答</h2>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">沐然洗发水的主要成分是什么？<span class="arrow">▾</span></div>
+      <div class="faq-a">沐然洗发水的核心活性成分为无患子（Sapindus Mukorossi）果皮提取物中的天然皂苷 Sanponin II。我们采用复合酶解定向提取技术获得高纯度皂苷，配合pH响应型脂质体包载和菌群共代谢微生态发酵工艺，实现温和深层清洁。配方pH值稳定在5.5-6.0，贴合健康头皮环境，不含硅油、硫酸盐等化学成分。</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">三款产品分别适合什么发质？<span class="arrow">▾</span></div>
+      <div class="faq-a">柔润修复洗发乳适合干燥受损、染烫后需要修护的发质；净澈控油洗发露适合油性头皮、出油过快的人群；植御去屑洗发露适合有头屑、头皮敏感泛红的人群。三款产品覆盖全头皮类型，您可以根据自身头皮状况选择最适合的款式。</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">使用多久能看到效果？<span class="arrow">▾</span></div>
+      <div class="faq-a">根据50名实测用户反馈：控油款使用后24小时即可感受到出油减少；去屑款使用7天头屑明显减少78%；修复款坚持使用28天角质层含水量增加28%。头皮敏感泛红改善率达89%，头屑复发率降低76%。个体效果因人而异，建议持续使用一个月以获得最佳效果。</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">产品通过了哪些安全检测？<span class="arrow">▾</span></div>
+      <div class="faq-a">沐然产品通过了9项权威检测认证，包括：COSMOS国际有机原材料符合性证明、CMA认证质量检测报告、非转基因声明、残留溶剂声明、Sanponin II技术说明书、化学品安全技术说明书（MSDS）等。原材料供应商成都三禾生物科技有限公司提供完整的质量追溯体系。</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">如何购买沐然产品？<span class="arrow">▾</span></div>
+      <div class="faq-a">目前沐然产品可通过天猫旗舰店、京东自营店购买，也可通过微信小程序"沐然洗发水"下单。我们还有会员积分体系和老客户返利活动。如需了解线下门店信息或批量采购，欢迎拨打客服电话或通过网页底部的联系方式咨询。</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">产品的退换货政策是什么？<span class="arrow">▾</span></div>
+      <div class="faq-a">沐然承诺7天无理由退换货。如果您对产品不满意，可在收到商品后7天内申请退换货（需保持产品未拆封/少量试用状态）。拆封使用后如出现过敏等问题，请联系客服处理。我们还提供15天质量保证，如有质量问题可全额退款。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final-cta" id="cta">
+  <h2 class="reveal">回归天然，从「沐然」开始</h2>
+  <p class="sub reveal reveal-d1">告别化学依赖，用千年古方与现代科技<br>守护你的头皮健康，让青丝不枯</p>
+  <div class="cta-actions reveal reveal-d2">
+    <a href="#" class="btn-white">立即选购 →</a>
+    <a href="#" class="btn-outline-white">咨询客服</a>
+  </div>
+  <div class="contact-grid reveal reveal-d3">
+    <div class="contact-item">
+      <div class="ci-icon">📞</div>
+      <div class="ci-label">客服电话</div>
+      <div class="ci-val">153-8812-0643</div>
+    </div>
+    <div class="contact-item">
+      <div class="ci-icon">📧</div>
+      <div class="ci-label">商务邮箱</div>
+      <div class="ci-val">muran@cuiyuanbio.com</div>
+    </div>
+    <div class="contact-item">
+      <div class="ci-icon">📍</div>
+      <div class="ci-label">公司地址</div>
+      <div class="ci-val">四川省宜宾市 · 宜宾学院</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">沐 然<small>MURAN · Natural Soapberry Haircare</small></div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>产品</h4>
+        <a href="#products">柔润修复洗发乳</a>
+        <a href="#products">净澈控油洗发露</a>
+        <a href="#products">植御去屑洗发露</a>
+      </div>
+      <div class="footer-col">
+        <h4>关于</h4>
+        <a href="#story">品牌故事</a>
+        <a href="#tech">核心技术</a>
+        <a href="#trust">资质认证</a>
+      </div>
+      <div class="footer-col">
+        <h4>支持</h4>
+        <a href="#faq">常见问题</a>
+        <a href="#cta">联系客服</a>
+        <a href="#">加盟合作</a>
+      </div>
+    </div>
+    <div class="footer-right">
+      <div class="footer-social">
+        <a href="#" title="微信公众号">微</a>
+        <a href="#" title="抖音">抖</a>
+        <a href="#" title="微博">微</a>
+        <a href="#" title="小红书">红</a>
+      </div>
+      <div style="font-size:11px;color:rgba(251,247,240,0.3)">萃元生物 CUIYUAN BIO</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2025 萃元生物科技有限公司 All rights reserved. 宜宾学院创新创业孵化项目</div>
+    <div><a href="#">隐私政策</a> · <a href="#">用户协议</a> · <a href="#">网站地图</a></div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// Nav scroll effect
+const mainNav = document.getElementById('mainNav');
+const prodSec = document.getElementById('products');
+window.addEventListener('scroll', () => {
+  mainNav.classList.toggle('scrolled', window.scrollY > 60);
+  const rect = prodSec.getBoundingClientRect();
+  const inDark = rect.top < 72 && rect.bottom > 72;
+  mainNav.classList.toggle('nav-dark', inDark && window.scrollY > 60);
+  
+  // Back to top button
+  document.getElementById('backTop').classList.toggle('show', window.scrollY > 600);
+});
+
+// Scroll reveal animation
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => observer.observe(el));
+
+// Product tabs (visual interaction)
+document.querySelectorAll('.product-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.product-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+
+// Counter animation for trust numbers
+function animateCounters() {
+  document.querySelectorAll('.trust-num, .social-num').forEach(el => {
+    const text = el.textContent;
+    const match = text.match(/^(\d+)/);
+    if (!match) return;
+    const target = parseInt(match[1]);
+    const suffix = text.replace(match[1], '');
+    let current = 0;
+    const step = Math.ceil(target / 40);
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = current + suffix;
+    }, 30);
+  });
+}
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { animateCounters(); counterObserver.disconnect(); }
+  });
+}, { threshold: 0.3 });
+const trustSection = document.getElementById('trust');
+if (trustSection) counterObserver.observe(trustSection);
+</script>
+</body>
+</html>
