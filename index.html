@@ -405,8 +405,8 @@ footer{background:var(--bark);color:rgba(251,247,240,0.4);padding:2.5rem clamp(1
         <div class="stat-box"><div class="stat-num">1087<span class="stat-unit">份</span></div><div class="stat-text">调研问卷</div></div>
       </div>
     </div>
-    <div class="story-visual reveal reveal-d1" style="overflow:hidden;background:none;border-radius:24px;">
-      <img src="全家福.png" alt="沐然产品全家福" style="width:100%;height:100%;object-fit:cover;border-radius:24px;">
+    <div class="story-visual reveal reveal-d1" style="overflow:hidden;background:none;">
+      <img src="全家福.png" alt="沐然产品全家福" style="width:100%;height:100%;object-fit:cover;">
     </div>
   </div>
 </section>
@@ -815,7 +815,7 @@ footer{background:var(--bark);color:rgba(251,247,240,0.4);padding:2.5rem clamp(1
     <div class="contact-item">
       <div class="ci-icon">📧</div>
       <div class="ci-label">商务邮箱</div>
-      <div class="ci-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8be6fef9eae5cbe8fee2f2feeae5e9e2e4a5e8e4e6">[email&#160;protected]</a></div>
+      <div class="ci-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="761b030417183615031f0f031718141f195815191b">[email&#160;protected]</a></div>
     </div>
     <div class="contact-item">
       <div class="ci-icon">📍</div>
@@ -923,4 +923,30 @@ function animateCounters() {
 }
 const counterObserver = new IntersectionObserver((entries) => {
   entries.forEach(e => {
-    if (e.isInte
+    if (e.isIntersecting) {
+      animateCounters();
+      counterObserver.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+const trustSection = document.querySelector('.trust');
+if (trustSection) counterObserver.observe(trustSection);
+
+// Mobile menu toggle
+const mobileToggle = document.querySelector('.mobile-toggle');
+const navLinks = document.querySelector('.nav-links');
+if (mobileToggle) {
+  mobileToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+}
+
+// FAQ accordion
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    item.classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>
